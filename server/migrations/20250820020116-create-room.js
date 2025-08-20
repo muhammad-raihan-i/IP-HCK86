@@ -27,7 +27,7 @@ module.exports = {
       KostId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
+          model: 'Kosts',
           key: 'id'
         }
       },

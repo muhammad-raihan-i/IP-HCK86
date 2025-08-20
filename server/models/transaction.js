@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Transaction.init({
+    isRunning: DataTypes.BOOLEAN,
     RoomId: DataTypes.INTEGER,
     RenteeId: DataTypes.INTEGER
   }, {
