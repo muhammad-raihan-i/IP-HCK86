@@ -5,6 +5,11 @@ const UserController = require('../controllers/userController');
 const KostController = require('../controllers/kostController');
 const RoomController = require('../controllers/roomController');
 const TransactionController = require('../controllers/transactionController');
+const authorize = require("../middlewares/authorize")
+const adminOnly = require("../middlewares/adminOnly")
+const ownerOnly = require("../middlewares/renteeOnly")
+const renteeOnly = require("../middlewares/renteeOnly")
+const accountHolderOnly = require("../middlewares/accountHolderOnly")
 
 const router = express.Router();
 
@@ -12,10 +17,12 @@ router.post("/login", LoginController.login);
 router.post("/register/rentee", LoginController.registerRentee);
 router.post("/register/owner", LoginController.registerOwner);
 
+router.use(authorize);
 // User routes
+
 router.get('/users', UserController.findAll);
 router.get('/users/:id', UserController.findOne);
-router.post('/users', UserController.create);
+router.post(accountHolderOnly,'/users', UserController.create);
 router.put('/users/:id', UserController.update);
 router.delete('/users/:id', UserController.delete);
 
