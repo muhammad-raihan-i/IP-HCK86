@@ -1,0 +1,50 @@
+--name User
+--attributes
+email:string
+password:string
+role:string
+fullName:string
+imgUrl:string
+bio:text
+birthDate:date
+gender:string
+job:string
+homeAddress:text
+officeAddress:text
+officeLat:float
+officeLong:float
+lowestBudget:integer
+highestBudget:integer
+isRenting:boolean
+
+--name Kost
+--attributes
+name:string
+description:text
+imgUrl:string
+address:string
+lat:float
+long:float
+OwnerId:integer
+
+--name Room
+--attributes
+number:integer
+imgUrl:string
+size:integer
+price:integer
+isRented:boolean
+KostId:integer
+
+--name Transaction
+--attributes
+RoomId:integer
+RenteeId:integer
+
+notes:
+user gender can be male,female
+user role can be admin,owner,rentee
+
+npx sequelize-cli model:generate --name User --attributes email:string,password:string,role:string,fullName:string,imgUrl:string,bio:text,birthDate:date,gender:string,job:string,homeAddress:text,officeAddress:text,officeLat:float,officeLong:float,lowestBudget:integer,highestBudget:integer,isRenting:boolean && npx sequelize-cli model:generate --name Kost --attributes name:string,description:text,imgUrl:string,address:string,lat:float,long:float,OwnerId:integer && npx sequelize-cli model:generate --name Room --attributes number:integer,imgUrl:string,size:integer,price:integer,isRented:boolean,KostId:integer && npx sequelize-cli model:generate --name Transaction --attributes RoomId:integer,RenteeId:integer
+
+npx sequelize-cli seed:create --name user && npx sequelize-cli seed:create --name kost && npx sequelize-cli seed:create --name room && npx sequelize-cli seed:create --name transaction

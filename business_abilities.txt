@@ -1,0 +1,22 @@
+OWNER ABILITIES
+READ user(self)
+CREATE user(self)
+UPDATE user(self)
+READ kost
+CREATE kost
+UPDATE kost
+DELETE kost (also deletes rooms)
+READ room
+CREATE room
+UPDATE room
+DELETE room
+ACCEPT transaction
+DECLINE transaction
+UPDATE transaction ---> EVICT
+MESSAGE ONE WAY TO renter
+
+RENTER ABILITIES
+READ user(self)
+CREATE user(self)
+UPDATE user(self)
+UPDATE transaction ---> END RENT

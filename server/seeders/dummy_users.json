@@ -1,0 +1,38 @@
+[
+  {
+    "email": "user1@example.com",
+    "password": "hashedpassword1",
+    "role": "rentee",
+    "fullName": "User One",
+    "imgUrl": "https://example.com/user1.jpg",
+    "bio": "Bio for user one.",
+    "birthDate": "1990-01-01",
+    "gender": "male",
+    "job": "Engineer",
+    "homeAddress": "123 Main St",
+    "officeAddress": "456 Office Rd",
+    "officeLat": -6.200000,
+    "officeLong": 106.816666,
+    "lowestBudget": 1000000,
+    "highestBudget": 3000000,
+    "isRenting": false
+  },
+  {
+    "email": "user2@example.com",
+    "password": "hashedpassword2",
+    "role": "owner",
+    "fullName": "User Two",
+    "imgUrl": "https://example.com/user2.jpg",
+    "bio": "Bio for user two.",
+    "birthDate": "1992-02-02",
+    "gender": "female",
+    "job": "Designer",
+    "homeAddress": "789 Main St",
+    "officeAddress": "101 Office Rd",
+    "officeLat": -6.210000,
+    "officeLong": 106.826666,
+    "lowestBudget": 2000000,
+    "highestBudget": 4000000,
+    "isRenting": false
+  }
+]

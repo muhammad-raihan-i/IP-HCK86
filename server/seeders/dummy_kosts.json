@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Kost A",
+    "description": "Kost nyaman di pusat kota.",
+    "imgUrl": "https://example.com/kostA.jpg",
+    "address": "Jl. Sudirman No. 1",
+    "lat": -6.200100,
+    "long": 106.816700,
+    "OwnerId": 2
+  },
+  {
+    "name": "Kost B",
+    "description": "Kost murah dan bersih.",
+    "imgUrl": "https://example.com/kostB.jpg",
+    "address": "Jl. Thamrin No. 2",
+    "lat": -6.210200,
+    "long": 106.826800,
+    "OwnerId": 2
+  }
+]

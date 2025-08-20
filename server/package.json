@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+  "save": "git add . && git commit -m \"chore: init\" && git push origin",
+  "model_delete": "db:migrate:undo:all",
+  "resetDB_d": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+  "resetDB_t": "npx sequelize-cli db:migrate:undo:all --env test && npx sequelize-cli db:migrate --env test && npx sequelize-cli db:seed:all --env test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "SERVER",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "express": "^5.1.0",
+    "jest": "^30.0.5",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2",
+    "pg": "^8.16.3",
+    "sequelize": "^6.37.7",
+    "supertest": "^7.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "sequelize-cli": "^6.6.3"
+  }
+}

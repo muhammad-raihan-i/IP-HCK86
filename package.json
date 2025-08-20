@@ -1,0 +1,12 @@
+{
+  "name": "ip_mkii_temp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "save": "git add . && git commit -m \"chore: baru mau migrate, hampir mau seeding\" && git push origin"
+  },
+  "keywords": [],
+  "author": "Muhammad Raihan Indrastoto",
+  "license": "ISC",
+  "description": ""
+}

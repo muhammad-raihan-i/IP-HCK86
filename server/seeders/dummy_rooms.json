@@ -1,0 +1,18 @@
+[
+  {
+    "number": 101,
+    "imgUrl": "https://example.com/room101.jpg",
+    "size": 20,
+    "price": 1500000,
+    "isRented": false,
+    "KostId": 1
+  },
+  {
+    "number": 102,
+    "imgUrl": "https://example.com/room102.jpg",
+    "size": 18,
+    "price": 1300000,
+    "isRented": true,
+    "KostId": 1
+  }
+]
