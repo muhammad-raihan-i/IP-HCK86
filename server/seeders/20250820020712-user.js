@@ -1,25 +1,20 @@
 'use strict';
-
+const {hash}=require("../helpers/bcrypt")
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
+
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+  const users = require('../data/dummy_users.json');
+    const now = new Date();
+    users.forEach(u => {
+      u.password = hash(u.password);
+      u.createdAt = now;
+      u.updatedAt = now;
+    });
+    await queryInterface.bulkInsert('Users', users, {});
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    await queryInterface.bulkDelete('Users', null, {});
   }
 };

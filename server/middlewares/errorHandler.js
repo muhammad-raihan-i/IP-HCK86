@@ -1,10 +1,16 @@
 
 function errorHandler(err, req, res, next) {
     let status = 500;
+    let name = err.name || 'Internal Server Error';
     let message = 'Internal Server Error';
 
     switch (err.name) {
         // 400 Bad Request
+        case 'BadRequest': {
+            status = 400;
+            message = err.message || 'Bad Request';
+            break;
+        }
         case 'SequelizeValidationError': {
             status = 400;
             message = err.errors[0]?.message || 'Validation error';
@@ -46,7 +52,7 @@ function errorHandler(err, req, res, next) {
             break;
     }
 
-    res.status(status).json({ message });
+    res.status(status).json({ name,message });
 }
 
 module.exports = errorHandler;

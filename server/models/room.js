@@ -10,16 +10,59 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Room.belongsTo(models.Kost, { foreignKey: 'KostId' });
+      Room.hasMany(models.Transaction, { foreignKey: 'RoomId' });
     }
   }
   Room.init({
-    number: DataTypes.INTEGER,
-    imgUrl: DataTypes.STRING,
-    size: DataTypes.INTEGER,
-    price: DataTypes.INTEGER,
-    isRented: DataTypes.BOOLEAN,
-    KostId: DataTypes.INTEGER
+    number: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'Room number is required' },
+        notEmpty: { msg: 'Room number is required' }
+      }
+    },
+    imgUrl: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'Image URL is required' },
+        notEmpty: { msg: 'Image URL is required' }
+      }
+    },
+    size: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'Room size is required' },
+        notEmpty: { msg: 'Room size is required' }
+      }
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'Room price is required' },
+        notEmpty: { msg: 'Room price is required' }
+      }
+    },
+    isRented: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'isRented is required' },
+        notEmpty: { msg: 'isRented is required' }
+      }
+    },
+    KostId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'KostId is required' },
+        notEmpty: { msg: 'KostId is required' }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Room',

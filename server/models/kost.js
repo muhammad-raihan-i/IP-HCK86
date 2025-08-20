@@ -10,17 +10,67 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Kost.hasMany(models.Room, { foreignKey: 'KostId' });
+      Kost.belongsTo(models.User, { foreignKey: 'OwnerId', as: 'Owner' });
     }
   }
   Kost.init({
-    name: DataTypes.STRING,
-    description: DataTypes.TEXT,
-    imgUrl: DataTypes.STRING,
-    address: DataTypes.STRING,
-    lat: DataTypes.FLOAT,
-    long: DataTypes.FLOAT,
-    OwnerId: DataTypes.INTEGER
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'Kost name is required' },
+        notEmpty: { msg: 'Kost name is required' }
+      }
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'Description is required' },
+        notEmpty: { msg: 'Description is required' }
+      }
+    },
+    imgUrl: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'Image URL is required' },
+        notEmpty: { msg: 'Image URL is required' }
+      }
+    },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'Address is required' },
+        notEmpty: { msg: 'Address is required' }
+      }
+    },
+    lat: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'Latitude is required' },
+        notEmpty: { msg: 'Latitude is required' }
+      }
+    },
+    long: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'Longitude is required' },
+        notEmpty: { msg: 'Longitude is required' }
+      }
+    },
+    OwnerId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'OwnerId is required' },
+        notEmpty: { msg: 'OwnerId is required' }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Kost',

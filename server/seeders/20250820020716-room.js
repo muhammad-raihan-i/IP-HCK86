@@ -3,23 +3,16 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+  const rooms = require('../data/dummy_rooms.json');
+    const now = new Date();
+    rooms.forEach(r => {
+      r.createdAt = now;
+      r.updatedAt = now;
+    });
+    await queryInterface.bulkInsert('Rooms', rooms, {});
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    await queryInterface.bulkDelete('Rooms', null, {});
   }
 };

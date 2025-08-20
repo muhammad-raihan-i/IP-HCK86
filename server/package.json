@@ -6,6 +6,7 @@
     "dev": "nodemon bin/www",
     "test": "jest",
     "save": "git add . && git commit -m \"chore: init\" && git push origin",
+    "createDummy": "node ./data/datamaker.js",
     "model_delete": "db:migrate:undo:all",
     "resetDB_d": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "resetDB_t": "npx sequelize-cli db:migrate:undo:all --env test && npx sequelize-cli db:migrate --env test && npx sequelize-cli db:seed:all --env test"
