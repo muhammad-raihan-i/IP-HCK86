@@ -57,8 +57,9 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Role is required'
         },
         isIn: {
-          args: [['rentee', 'owner']],
+          args: [['rentee', 'owner', 'admin']],
           msg: 'Role must be either rentee or owner'
+          //admin role is secret!
         }
       }
     },

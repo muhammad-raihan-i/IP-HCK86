@@ -44,7 +44,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: { msg: 'Room price is required' },
-        notEmpty: { msg: 'Room price is required' }
+        notEmpty: { msg: 'Room price is required' },
+        min: {
+          args: 1000,
+          msg: 'Room price must be at least 1000'
+        }
       }
     },
     isRented: {

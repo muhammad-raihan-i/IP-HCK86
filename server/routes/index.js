@@ -9,6 +9,8 @@ const TransactionController = require('../controllers/transactionController');
 const router = express.Router();
 
 router.post("/login", LoginController.login);
+router.post("/register/rentee", LoginController.registerRentee);
+router.post("/register/owner", LoginController.registerOwner);
 
 // User routes
 router.get('/users', UserController.findAll);

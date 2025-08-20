@@ -17,16 +17,112 @@ class LoginController{
             }
             object2={
                 id: user.id,
-                email,
+                email: user.email,
             }
             const token = sign(object2);
             res.status(200).json({ token });
         }catch(error){
-            console.log("error at loginController");
+            console.log("error at loginController/login");
+            console.log(error)
+            next(error);
+        }
+    }
+    static async registerRentee(req, res, next) {
+        let {
+            email,
+            password,
+            role,
+            fullName,
+            imgUrl,
+            bio,
+            birthDate,
+            gender,
+            job,
+            homeAddress,
+            officeAddress,
+            officeLat,
+            officeLong,
+            lowestBudget,
+            highestBudget,
+            isRenting
+        } = req.body;
+        role = 'rentee';
+        isRenting = false;
+        try{
+            const user = await User.create({
+                email,
+                password,
+                role,
+                fullName,
+                imgUrl,
+                bio,
+                birthDate,
+                gender,
+                job,
+                homeAddress,
+                officeAddress,
+                officeLat,
+                officeLong,
+                lowestBudget,
+                highestBudget,
+                isRenting
+            });
+            delete user.password
+            res.status(201).json({ data:user });
+        }catch(error){
+            console.log("error at loginController/registerRentee");
+            console.log(error)
+            next(error);
+        }
+    }
+    static async registerOwner(req, res, next) {
+        let {
+            email,
+            password,
+            role,
+            fullName,
+            imgUrl,
+            bio,
+            birthDate,
+            gender,
+            job,
+            homeAddress,
+            officeAddress,
+            officeLat,
+            officeLong,
+            lowestBudget,
+            highestBudget,
+            isRenting
+        } = req.body;
+        role = 'owner';
+        isRenting = false;
+        try{
+            const user = await User.create({
+                email,
+                password,
+                role,
+                fullName,
+                imgUrl,
+                bio,
+                birthDate,
+                gender,
+                job,
+                homeAddress,
+                officeAddress,
+                officeLat,
+                officeLong,
+                lowestBudget,
+                highestBudget,
+                isRenting
+            });
+            delete user.password
+            res.status(201).json({ data:user });
+        }catch(error){
+            console.log("error at loginController/registerOwner");
             console.log(error)
             next(error);
         }
     }
 }
 
-module.exports=LoginController
+module.exports = LoginController;

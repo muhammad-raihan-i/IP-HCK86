@@ -10,8 +10,8 @@
       "item": [
   { "name": "Get All Users", "request": { "method": "GET", "url": "{{BASE_URL}}/users" } },
   { "name": "Get User By ID", "request": { "method": "GET", "url": "{{BASE_URL}}/users/:id" } },
-  { "name": "Create User", "request": { "method": "POST", "url": "{{BASE_URL}}/users", "body": { "mode": "raw", "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password\",\n  \"role\": \"rentee\"\n}" } } },
-  { "name": "Update User", "request": { "method": "PUT", "url": "{{BASE_URL}}/users/:id", "body": { "mode": "raw", "raw": "{\n  \"fullName\": \"Updated Name\"\n}" } } },
+  { "name": "Create User", "request": { "method": "POST", "url": "{{BASE_URL}}/users", "body": { "mode": "raw", "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password\",\n  \"role\": \"rentee\",\n  \"fullName\": \"Test User\",\n  \"imgUrl\": \"https://example.com/test.jpg\",\n  \"bio\": \"Test bio\",\n  \"birthDate\": \"1990-01-01\",\n  \"gender\": \"male\",\n  \"job\": \"Engineer\",\n  \"homeAddress\": \"123 Main St\",\n  \"officeAddress\": \"456 Office Rd\",\n  \"officeLat\": -6.2,\n  \"officeLong\": 106.816666,\n  \"lowestBudget\": 1000000,\n  \"highestBudget\": 3000000,\n  \"isRenting\": false\n}" } } },
+  { "name": "Update User", "request": { "method": "PUT", "url": "{{BASE_URL}}/users/:id", "body": { "mode": "raw", "raw": "{\n  \"email\": \"updated@example.com\",\n  \"password\": \"newpassword\",\n  \"role\": \"owner\",\n  \"fullName\": \"Updated Name\",\n  \"imgUrl\": \"https://example.com/updated.jpg\",\n  \"bio\": \"Updated bio\",\n  \"birthDate\": \"1991-02-02\",\n  \"gender\": \"female\",\n  \"job\": \"Designer\",\n  \"homeAddress\": \"456 Main St\",\n  \"officeAddress\": \"789 Office Rd\",\n  \"officeLat\": -6.3,\n  \"officeLong\": 106.826666,\n  \"lowestBudget\": 1200000,\n  \"highestBudget\": 3200000,\n  \"isRenting\": true\n}" } } },
   { "name": "Delete User", "request": { "method": "DELETE", "url": "{{BASE_URL}}/users/:id" } }
       ]
     },
@@ -30,8 +30,8 @@
       "item": [
   { "name": "Get All Rooms", "request": { "method": "GET", "url": "{{BASE_URL}}/rooms" } },
   { "name": "Get Room By ID", "request": { "method": "GET", "url": "{{BASE_URL}}/rooms/:id" } },
-  { "name": "Create Room", "request": { "method": "POST", "url": "{{BASE_URL}}/rooms", "body": { "mode": "raw", "raw": "{\n  \"number\": 101\n}" } } },
-  { "name": "Update Room", "request": { "method": "PUT", "url": "{{BASE_URL}}/rooms/:id", "body": { "mode": "raw", "raw": "{\n  \"number\": 102\n}" } } },
+  { "name": "Create Room", "request": { "method": "POST", "url": "{{BASE_URL}}/rooms", "body": { "mode": "raw", "raw": "{\n  \"number\": 101,\n  \"imgUrl\": \"https://example.com/room.jpg\",\n  \"size\": 20,\n  \"price\": 1500,\n  \"isRented\": false,\n  \"KostId\": 1\n}" } } },
+  { "name": "Update Room", "request": { "method": "PUT", "url": "{{BASE_URL}}/rooms/:id", "body": { "mode": "raw", "raw": "{\n  \"number\": 102,\n  \"imgUrl\": \"https://example.com/room2.jpg\",\n  \"size\": 25,\n  \"price\": 2000,\n  \"isRented\": true,\n  \"KostId\": 2\n}" } } },
   { "name": "Delete Room", "request": { "method": "DELETE", "url": "{{BASE_URL}}/rooms/:id" } }
       ]
     },
@@ -40,8 +40,8 @@
       "item": [
   { "name": "Get All Transactions", "request": { "method": "GET", "url": "{{BASE_URL}}/transactions" } },
   { "name": "Get Transaction By ID", "request": { "method": "GET", "url": "{{BASE_URL}}/transactions/:id" } },
-  { "name": "Create Transaction", "request": { "method": "POST", "url": "{{BASE_URL}}/transactions", "body": { "mode": "raw", "raw": "{\n  \"RoomId\": 1,\n  \"RenteeId\": 1\n}" } } },
-  { "name": "Update Transaction", "request": { "method": "PUT", "url": "{{BASE_URL}}/transactions/:id", "body": { "mode": "raw", "raw": "{\n  \"RoomId\": 2\n}" } } },
+  { "name": "Create Transaction", "request": { "method": "POST", "url": "{{BASE_URL}}/transactions", "body": { "mode": "raw", "raw": "{\n  \"isRunning\": true,\n  \"RoomId\": 1,\n  \"RenteeId\": 1\n}" } } },
+  { "name": "Update Transaction", "request": { "method": "PUT", "url": "{{BASE_URL}}/transactions/:id", "body": { "mode": "raw", "raw": "{\n  \"isRunning\": false,\n  \"RoomId\": 2,\n  \"RenteeId\": 2\n}" } } },
   { "name": "Delete Transaction", "request": { "method": "DELETE", "url": "{{BASE_URL}}/transactions/:id" } }
       ]
     }
