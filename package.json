@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "save": "git add . && git commit -m \"chore: mulai menambah file-file terlebih dahulu karena stuck dan tidak tahu lagi mau ngapain dengan server. yang jelas masih harus buat testing, memastikan bahwa semua middleware bekerja dengan baik, dan memastikan benar-benar bahwa semua controller berjalan dengan semestinya. blocker: terdapat 16 buah variabel untuk satu user untuk ditambahkan melalui postman\" && git push origin development"
+    "save": "git add . && git commit -m \"chore: install multer + imagekit\" && git push origin development"
   },
   "keywords": [],
   "author": "Muhammad Raihan Indrastoto",
