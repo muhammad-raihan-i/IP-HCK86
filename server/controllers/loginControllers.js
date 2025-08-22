@@ -1,11 +1,11 @@
-const {User} = require("model")
+const {User} = require("../models")
 class LoginController {
     static async login(req, res, next) {
         try {
             const { email, password } = req.body;
             const user = await User.findOne({ where: { email } });
             if (!user || user.password !== password) {
-                throw { name: "Unauthorized" };
+                throw { name: "BadRequest" , message:"Invalid email or password"};
             }
         } catch (error) {
             console.error(error);
@@ -16,6 +16,7 @@ class LoginController {
         try{
             const { email, password } = req.body;
             const newUser = await User.create({ email, password });
+            newUser.password = undefined;
             res.status(201).json(newUser);
         }catch(error){
             console.error(error);
