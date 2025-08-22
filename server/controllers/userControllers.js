@@ -3,7 +3,7 @@ class UserController{
     //1
     static async findAll(req, res,next) {
         try {
-            const users = await User.findAll();
+            const users = await User.findAll({attributes:{exclude:["password"]}});
             res.json(users);
         } catch (error) {
             console.error(error);
@@ -17,22 +17,11 @@ class UserController{
             if (!user) {
                 throw {name:"NotFound"}
             }
+            user.password=undefined
             res.json(user);
         } catch (error) {
             console.error(error);
             next(error)
-        }
-    }
-    //3
-    static async create(req, res,next) {
-        try {
-            const { email, password } = req.body;
-            const newUser = await User.create({ email, password });
-            newUser.password=undefined
-            res.status(201).json(newUser);
-        } catch (error) {
-            console.error(error);
-            next(error);
         }
     }
     //4

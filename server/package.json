@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --detectOpenHandles --verbose",
     "resetDB_dev": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
     "resetDB_test":"sequelize db:drop --env test && sequelize db:create --env test && sequelize db:migrate --env test && sequelize db:seed:all --env test"
   },

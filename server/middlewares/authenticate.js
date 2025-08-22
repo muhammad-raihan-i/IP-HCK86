@@ -10,3 +10,4 @@ function authenticate(req, res, next) {
         next(error)
     }
 }
+module.exports=authenticate

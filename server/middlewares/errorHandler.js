@@ -4,6 +4,14 @@ function errorHandler(err, req, res, next) {
     let status=500
     let message='Internal Server Error'
     switch (err.name) {
+        case "SequelizeUniqueConstraintError":
+            status = 400
+            message = "Email is already in use"
+            break
+        case "SequelizeValidationError":
+            status = 400
+            message = err.errors.map(e => e.message).join(", ")
+            break
         case 'BadRequest':
             status = 400
             message = err.message
@@ -17,5 +25,6 @@ function errorHandler(err, req, res, next) {
             message = err.message
             break
     }
-    res.status(status).send(message)
+    res.status(status).json({ name:err.name,message })
 }
+module.exports=errorHandler

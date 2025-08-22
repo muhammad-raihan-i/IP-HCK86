@@ -13,3 +13,4 @@ async function ownerOnly(req, res, next) {
         next(error)
     }
 }
+module.exports=ownerOnly

@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         notNull:{
           msg: "Email is required"
         },
-        noEmpty:{
+        notEmpty:{
           msg: "Email is required"
         },
       }
@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         notNull:{
           msg: "Password is required"
         },
-        noEmpty:{
+        notEmpty:{
           msg: "Password is required"
         }
       }

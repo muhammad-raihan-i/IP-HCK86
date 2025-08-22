@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ownerOnly=require("../middlewares/ownerOnly.js")
+const userOnly=require("../middlewares/userOnly.js")
 const authenticate=require("../middlewares/authenticate.js")
 
 // Import controllers
@@ -13,11 +14,11 @@ router.post('/login', LoginController.login);
 router.post('/register', LoginController.register);
 
 // User routes
-app.use(authenticate)
+router.use(authenticate)
 router.get('/users', UserController.findAll);
 router.get('/users/:id', UserController.findOne);
-router.put('/users/:id',ownerOnly, UserController.update);
-router.delete('/users/:id',ownerOnly, UserController.delete);
+router.put('/users/:id',userOnly, UserController.update);
+router.delete('/users/:id',userOnly, UserController.delete);
 
 // House routes
 router.get('/houses', HouseController.findAll);

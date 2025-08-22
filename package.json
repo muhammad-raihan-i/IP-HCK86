@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "save": "git add . && git commit -m \"chore: reinstall client\" && git push origin development"
+    "save": "git add . && git commit -m \"chore: deploy trial\" && git push origin development"
   },
   "keywords": [],
   "author": "Muhammad Raihan Indrastoto",
