@@ -15,4 +15,5 @@
   },
   "production": {
     "use_env_variable": "DB_STRING"
+  }
 }
