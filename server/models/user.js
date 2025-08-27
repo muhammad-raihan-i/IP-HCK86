@@ -1,5 +1,5 @@
 'use strict';
-const {hash}=require("../helpers/bcrypt.js")
+const {hash}=require("../helpers/bcrypt")
 const {
   Model
 } = require('sequelize');
@@ -11,45 +11,45 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      User.hasMany(models.House,{ foreignKey: 'UserId' })
+      User.hasMany(models.House,{foreignKey:"OwnerId"})
     }
   }
   User.init({
     email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
+      type:DataTypes.STRING,
+      unique:true,
+      allowNull:false,
       validate:{
-        isEmail: {
-          msg: "Invalid email format"
-        },
         notNull:{
-          msg: "Email is required"
+          msg:"Email required"
         },
         notEmpty:{
-          msg: "Email is required"
+          msg:"Email required"
         },
+        isEmail:{
+          msg:"Email invalid"
+        }
       }
     },
     password: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type:DataTypes.STRING,
+      allowNull:false,
       validate:{
         notNull:{
-          msg: "Password is required"
+          msg:"Password required"
         },
         notEmpty:{
-          msg: "Password is required"
-        }
+          msg:"Password required"
+        },
       }
-    }
+    },
   }, {
     hooks:{
-      beforeCreate: (user) => {
-        user.password = hash(user.password);
+      beforeCreate:(user,options)=>{
+        user.password=hash(user.password)
       },
-      beforeUpdate: (user) => {
-        user.password = hash(user.password);
+      beforeUpdate:(user,options)=>{
+        user.password=hash(user.password)
       }
     },
     sequelize,

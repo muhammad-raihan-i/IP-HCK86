@@ -1,9 +1,9 @@
-require("dotenv").config();
+require("dotenv").config()
+const port=process.env.PORT
 const app=require("../app.js")
-const PORT = process.env.PORT || 3000;
-// Start server
-if (require.main === module) {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
-}
+
+app.listen(port,function t(){
+    console.log("server run at port",port)
+    console.log("[FINISHED] at",new Date(),"\n")
+})
+//da

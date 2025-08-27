@@ -2,18 +2,22 @@
   "development": {
     "username": "postgres",
     "password": "postgres",
-    "database": "ip_mk3_d",
-    "host": "127.0.0.1",
+    "database": "ip4_d",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
     "password": "postgres",
-    "database": "ip_mk3_t",
-    "host": "127.0.0.1",
+    "database": "ip4_t",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "production": {
-    "use_env_variable": "DB_STRING"
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   }
 }

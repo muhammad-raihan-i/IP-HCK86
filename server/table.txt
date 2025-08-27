@@ -1,0 +1,20 @@
+npx sequelize model:create --name User --attributes
+
+User
+email:string,
+password:string
+
+email:string,password:string
+npx sequelize model:create --name User --attributes email:string,password:string
+
+House
+name:string,
+address:text,
+imageUrl:text,
+available:boolean,
+OwnerId:integer
+
+name:string,address:text,imageUrl:text,available:boolean,OwnerId:integer
+
+npx sequelize model:create --name User --attributes email:string,password:string
+npx sequelize model:create --name House --attributes name:string,address:text,imageUrl:text,available:boolean,OwnerId:integer

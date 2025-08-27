@@ -1,18 +1,18 @@
 require("dotenv").config()
-const GoogleGenAI=require("@google/genai");
+const {GoogleGenAI } =require("@google/genai");
 
-const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_SECRET });
 
-async function gemini2(prompt) {
-  const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
-    contents: prompt,
-  });
-  console.log(response.text);
+async function gemini(prompt) {
+    console.log("running gemini")
+    const response = await ai.models.generateContent({
+        model: "gemini-2.0-flash",
+        contents: `Gemini roleplay:
+Cari tau rumah yang bagus, rekomendasi menyewa atau menyewakan, rekomendasi daerah.
+Jangan terlalu panjang.
+Prompts: ${prompt}`,
+    });
+    return response.text
 }
 
-async function recommend(data){//temporary
-    await gemini2(`suggest as json from ${data}`)
-}
-
-module.exports = gemini2;
+module.exports= gemini

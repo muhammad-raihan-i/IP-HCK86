@@ -1,30 +1,28 @@
-const express = require('express');
-const router = express.Router();
-const ownerOnly=require("../middlewares/ownerOnly.js")
-const userOnly=require("../middlewares/userOnly.js")
+const express=require("express")
+const routes=express()
+const UserController=require("../controllers/userController.js")
+const HouseController=require("../controllers/houseController.js")
+const GeminiController=require("../controllers/geminiController.js")
 const authenticate=require("../middlewares/authenticate.js")
-
-// Import controllers
-const UserController = require('../controllers/userControllers');
-const LoginController = require('../controllers/loginControllers');
-const HouseController = require('../controllers/houseControllers');
-
-// Login routes
-router.post('/login', LoginController.login);
-router.post('/register', LoginController.register);
-
-// User routes
-router.use(authenticate)
-router.get('/users', UserController.findAll);
-router.get('/users/:id', UserController.findOne);
-router.put('/users/:id',userOnly, UserController.update);
-router.delete('/users/:id',userOnly, UserController.delete);
-
-// House routes
-router.get('/houses', HouseController.findAll);
-router.get('/houses/:id', HouseController.findOne);
-router.post('/houses/:userId',ownerOnly, HouseController.create);
-router.put('/houses/:id/:userId',ownerOnly, HouseController.update);
-router.delete('/houses/:id',ownerOnly, HouseController.delete);
-
-module.exports = router;
+const authorize=require("../middlewares/authorize.js")
+const errorHandler=require("../middlewares/errorHandler.js")
+/*
+mkdir controllers
+mkdir middlewares
+touch middlewares/authenticate.js
+touch middlewares/authorize.js
+touch middlewares/errorHandler.js
+touch controllers/userController.js
+touch controllers/houseController.js
+*/
+routes.post("/login",UserController.login)
+routes.post("/register",UserController.register)
+routes.use(authenticate)
+routes.get("/houses",HouseController.findAll)
+routes.post("/gemini",GeminiController.gemini)
+routes.post("/houses/create",HouseController.create)//must login
+routes.put("/houses/update/:id",authorize,HouseController.update)//owner only
+routes.delete("/houses/delete/:id",authorize,HouseController.delete)//owner only
+routes.get("/houses/:id",HouseController.findOne)
+routes.use(errorHandler)
+module.exports=routes

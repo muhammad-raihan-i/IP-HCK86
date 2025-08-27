@@ -9,18 +9,26 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      address: {
+      name: {
         type: Sequelize.STRING
       },
-      imgUrl: {
+      address: {
         type: Sequelize.TEXT
       },
-      UserId: {
+      imageUrl: {
+        type: Sequelize.TEXT
+      },
+      available: {
+        type: Sequelize.BOOLEAN
+      },
+      OwnerId: {
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id'
-        }
+        references:{
+          model:"Users",
+          key:"id"
+        },
+        onDelete:"cascade",
+        onUpdate:"cascade",
       },
       createdAt: {
         allowNull: false,

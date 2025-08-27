@@ -1,0 +1,254 @@
+petunjuk pengerjaan (ip, group project, lc3)
+1. init
+npm init -y
+2. buat file server
+mkdir server
+3. buat file client
+mkdir client
+4. masuk ke server
+cd server
+5. npm init -y di dalem server
+npm init -y
+6. install perlengkapan server
+npm install express pg sequelize bcryptjs jsonwebtoken dotenv cors jest supertest
+npm install -D nodemon sequelize-cli
+touch .gitignore && code .gitignore
+node_modules
+.env
+
+7. init sequelize
+npx sequelize init
+8. masuk ke config
+code config/config.json
+lalu ubah username/password jadi postgres dan 
+ubah nama database jadi xxx_dev untuk dev dan xxx_test untuk test
+9. buat file txt untuk membuat tabel menjadi lebih mudah
+touch table.txt && code table.txt
+readable: https://sequelize.org/docs/v6/other-topics/migrations/
+10. isi tabel tersebut dengan command pembuatan model
+model harus pascal case singular
+npx sequelize model:create --name Xxxx --attributes abc:string,def:text,ghi:integer
+11. jika sudah, masuk ke file migrations
+code 2025082413460000-xxxx.js
+12. masukkan unique dan reference key di tempat yang dibutuhkan
+---> unique:
+yg biasanya butuh unique:true ---> email (rarely: username juga)
+---> references: (ini verb+s, bukan noun+s)
+https://sequelize.org/docs/v6/core-concepts/assocs/ cari "references:(object)"
+references:{
+    key:"id",--->99.9% selalu id
+    model:"Xxxx"
+} <--- object
+--->onDelete/onUpdate:"cascade"
+ingat: nama propertynya key dan model!
+jika sudah, boleh diclose saja
+13. buat file seeding dengan cara
+npx sequelize seed:create --name Xxxx
+PASCAL SINGULAR!!!
+14. masuk ke file seeder dengan cara
+code xxxxxxx-Xxxx.js
+atau cara manual juga bisa
+15. di file seeder, import fs untuk load dummy.
+16. buat up function dg cara ikuti yg sudah dicomment di sana
+nanti sebutin nama tabelnya (Pascal Plural)
+17. buat down function juga sama
+18. khusus tabel User, harus import bcrypt untuk encrypt PASSWORD!!
+taro di HOOKS
+hooks:(object) ---> isinya beforeCreate/beforeUpdate(xxx,option) (ini function)
+19. lakukan step 16-17 sampe semua tabel udah
+20. masuk ke models/Xxxx
+21. masukin semua hal seperti
+--->relations (Aaaa hasMany/hasOne/belongsTo(models.Bbbb,{foreignKey:"xxxx"}))
+--->unique
+--->allowNull
+--->validate:(object)
+isi object: notNull, notEmpty, isEmail, dan itu semua
+property dengan object yg isinya msg:"abcdabcdabcd"
+22. setelah itu buat data dummy (jika sudah ada bisa diskip)
+buat 1 dan 2 row saja, dan usahakan sesederhana mungkin kayak misalnya
+email:"admin@gmail.com",
+password:"Admin123"
+23. buat database (PASTIKAN CONFIG SUDAH DIISI!!!)
+npx sequelize db:create
+npx sequelize db:create --env test
+24. run migration dan seeding
+npx sequelize db:migrate && npx sequelize db:seed:all
+25. setelah seeding, masuk ke packages.json untuk membuat shortcut
+"dev":"npx nodemon bin/www",
+"test":"jest --verbose --detectOpenHandles",
+"save":"git add . && git push origin -m \"chore: init\" && git push origin"
+"resetDB_d":"npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all",
+
+26. touch app.js
+27. code app.js
+https://expressjs.com/en/starter/hello-world.html
+salin semua dari sini, tapi LISTEN dipindah ke bin/www
+tambahkan module.exports di bawah
+dan define variabel port di bin/www (import dulu dari app.js).
+lalu juga import routes dari routes/index.js
+(dibuatnya nanti)
+28. tambahkan juga use express.json invoke dan use express.urlencoded (function dg argumen object)
+29. buat bin/www
+30. tempel si LISTEN dari bin/www
+31. kalau sudah, buat routes/index.js
+32. masuk ke routes/index
+33. buat semua route BERDASARKAN TABEL yang ada, tambah login/register jika perlu
+import semua dari controllers (dibikin NANTI!!!!!)
+GET route READ ALL
+GET route READ ONE
+POST route CREATE
+PUT route UPDATE
+DELETE route DELETE
+format: method.(link,function1,function2,function3....)
+JANGAN LUPA DI-MODULE(dot)EXPORTS
+
+34. mkdir controllers
+35. buat file sebanyak tabel untuk controller (atau tambah 1)
+36. masuk ke controller
+cara import User/Item/Dkk ---> destructure dari models/index.js
+khusus USER tambahkan juga BCRYPTJS dan JSONWEBTOKEN!!! (sebagai const baru)
+37. buat class yang isinya static async xxxxx(req,res,next){...}
+(tapi paling xxxxx isinya either:
+    findAll 
+    findOne
+    create
+    update
+    destroy (di SEQUELIZE namanya bukan DELETE!!!)
+)
+38. isinya ada try-catch (dan catchnya ngebuang ke middlewares/errorHandler.js (dibikin nanti!))
+JANGAN LUPA MASUKIN CONSOLE.LOG SEBANYAK BANYAKNYA BIAR GA BINGUNG!!!!!
+39. di setiap function, bikin const yang namanya "data" yang buat nampung content dari sequelize.
+function di sequelize untuk mengambil data dari database...
+...kebetulan namanya sama dengan apa yang ada di nomor 37
+---> kalo bingung, bikin lima2nya aja (ntar tinggal didelete di routes)
+---> khusus PASSWORD harus diHAPUS dulu (atau diREASSIGN ke UNDEFINED)
+---> INGAT!! const data BENTUKNYA ADALAH CLASS!!!
+---> kalo tabel yang butuh user, harus ada req.user dari si authentication (cek no. 43)
+kalau mau dimasukin ke JWT sign, HARUS BUAT OBJECT KOSONG BARU DULU!!
+---> PASSWORD JANGAN DIMASUKIN KE JWT SIGN!!!!!
+---> di akhir bagian TRY ada res status json!!
+(status bisa diskip dan otomatis 200)
+
+40. setelah buat semua controller, buat juga middlewares
+mkdir middlewares
+41. buat 2 (atau lebih) file di middleware
+-> authentication (buat masukin bearer token)
+-> errorHandler
+-> (kalau ada): adminOnly, ownerOnly, dkk
+42. authentication
+buat async function yang isinya ada try catch, dan argumennya (req,res,next)
+import JWT function verify di TRY
+ini nanti ngeNext si req.user atau sejenisnya
+export function
+kalau error, buang ke errorHandler (semuanya pasti akan ke situ)
+43. errorHandler
+buat async function yang argumennya (err,req,res,next)
+buat switch case untuk setiap (err.name)
+dan return status yang berbeda2
+200 -> ok
+201 -> created
+400 -> bad request
+401 -> unauthorized
+403 -> forbidden
+404 -> not found
+SESUAIKAN NAMA ERROR DENGAN PERMINTAAN SOAL!!!
+semua response backend akan selesai di sini
+
+44. buat folder testing (jika belum ada)
+mkdir __test__
+buat folder testing dengan nama xxxxx.test.js
+login.test.js
+user.test.js
+xxxx.test.js
+45. load barang barang ini di file testing
+--> @jest/globals
+yg diimport: test, expect, describe
+--> ../models/index.js
+yg diimport: <model yang mau ditest>
+--> supertest
+yg diimport: res
+lakukan test dan kalau bisa bisa masuk ke tahap berikutnya: client
+
+46. panggil package vite untuk starter app
+npm create vite@latest
+47. delete semua isi yang tidak penting
+seperti app.css, index.css app.jsx (yang di dalam return saja yang dihapus,
+sisanya jangan!!!!)
+48. install semua package untuk client
+npm i react-router axios @reduxjs/toolkit react-redux sweetalert2
+49. buat file components di dalem src
+isi di dalemnya button.jsx, card.jsx, navbar.jsx, loginForm.jsx
+50. copy semua elemen dari bootstrap 5.3 (ambil yg edisi terbaru aja),
+tapi ubah dulu ke JSX pake converter
+https://transform.tools/html-to-jsx
+51. buat button.jsx
+taro props di button yang isinya
+type=... bisa submit atau button
+class=... bisa primary atau danger
+onClick=... isi sama function yang didefine di atas return di
+jsxan yang ngeimport button ini
+52. buat navbar.jsx
+taro button yg isinya function yg pake useNavigate
+cara bikin useNavigate: pertama bikin constant yg namanya navigate, itu direassign pake
+function yg namanya useNavigate() <--- harus diinvoke pake kosongan
+khusus logout, dia juga harus ngapus token di app
+localStorage <--- camel singular
+.removeItem <--- camel singular juga
+("namaItem") <--- camel singular
+53. buat card.jsx
+taro props sbg argumen function
+destruct props: image, title, text, buttonFunction1, buttonFunction2
+ini nanti si buttonFunction bakal ditaro di button di dalem card
+functionnya bisa ngeload detail/:id pake axios get
+54.
+
+51. navbar
+khusus navbar, pake useNavigate atau Navigate, import destruct dari react-router
+
+51. buat folder page
+mkdir page
+52. buat semua page yang dibutuhkan
+touch loginPage.jsx
+touch registerPage.jsx
+touch homePage.jsx
+touch xxxPage.jsx
+dan seterusnya
+53. jika page butuh navbar, taro semua navbar di setiap page aja (gausah pake layout)
+54. import semua yang dibutuhkan juga
+
+51. sekarang, buat store.js setara sama src
+touch store.js
+52. code store.js
+53. import destructure configureStore dari @reduxjs/toolkit
+54. import xxxxReducer dari "xxxxSlice.js" <--- ini nanti dibikin
+55. buat variabel const store untuk mengambil dari function xxxReducer
+...yang argumennya adalah object
+56. objek di nomor 55 sebagai berikut
+reducer: innerObject
+-----
+innerObject isinya adalah
+xxxxx: xxxxxReducer <--- ini property yang valuenya adalah function
+57. masuk ke main.js untuk membungkus <App/> dengan <Provider store={store}> .....</Provider>
+58. buat xxxSlice.js (ini tadi yang diomongin di nomor 54)
+touch xxxSlice.js
+59. code xxxSlice.js
+60. import destruct createSlice (ini function) dari @reduxjs/toolkit
+61. buat variabel yang namanya initialState (ini object)
+taro semua propertinya di sini
+62. buat variabel const lagi yang namanya xxxSlice,
+reassign pake function yg namanya createSlice (dari nomor 60),
+argumennya adalah object:
+name: "xxxxx",
+initialState:initialState,
+reducers:reducerObject
+----------
+reducerObject isinya adalah...
+callback function yang argumennya adalah state atau action
+state.var1 = newValue1Here
+state.var2 = newValue2Here
+state.var3 = [...state.var3,action.payload]
+dan seterusnya
+63. export destructure semua callback function di nomor 62,
+destructure dari xxxSlice.actions
+64. export default si xxxSlicer.reducer (yg ini gapake s)
+65. 

@@ -10,13 +10,18 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      House.belongsTo(models.User,{ foreignKey: 'UserId' })
+      House.belongsTo(models.User,{foreignKey:"OwnerId"})
     }
   }
   House.init({
-    address: DataTypes.STRING,
-    imgUrl: DataTypes.TEXT,
-    UserId: DataTypes.INTEGER
+    name: DataTypes.STRING,
+    address: DataTypes.TEXT,
+    imageUrl: DataTypes.TEXT,
+    available: {
+      type:DataTypes.BOOLEAN,
+      defaultValue:true
+    },
+    OwnerId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'House',

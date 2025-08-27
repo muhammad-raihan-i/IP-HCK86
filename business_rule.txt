@@ -1,0 +1,14 @@
+Aplikasi Penyewaan Rumah
+
+User dapat menyewakan rumah di platform ini.
+
+Terdapat 2 tabel:
+User
+email (S)
+password (S)
+
+House
+name (S)
+address (T)
+available (B)
+OwnerId (I)

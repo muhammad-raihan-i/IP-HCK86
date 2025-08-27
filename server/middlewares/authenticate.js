@@ -1,12 +1,30 @@
 const {verify}=require("../helpers/jwt.js")
-function authenticate(req, res, next) {
+async function authenticate(req,res,next){
     try{
-        const token=req.headers.authorization?.split(" ")[1]
-        if(!token) throw {name:"Unauthorized"}
-        const decoded=verify(token)
-        req.user=decoded
+        console.log("try@authenticate")
+        //authenticate: verify jwt
+        let token=req.headers.authorization
+        console.log("check if token exists")
+        if(!token){
+            throw {name:"Unauthorized",message:"Invalid token"}
+        }
+        let token2=token.split(" ")
+        console.log("check if Bearer")
+        if(token2[0]!=="Bearer"){
+            throw {name:"Unauthorized",message:"Invalid token"}
+        }
+        console.log("check if User")
+        let user=verify(token2[1])
+        if(!user){
+            throw {name:"Unauthorized",message:"Invalid token"}
+        }
+        console.log("assign req.user")
+        req.user=user
+        console.log("authenticate done")
         next()
     }catch(error){
+        console.log("error@authenticate")
+        console.log(error)
         next(error)
     }
 }
