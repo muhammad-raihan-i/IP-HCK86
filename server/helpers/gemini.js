@@ -9,7 +9,8 @@ async function gemini(prompt) {
         model: "gemini-2.0-flash",
         contents: `Gemini roleplay:
 Cari tau rumah yang bagus, rekomendasi menyewa atau menyewakan, rekomendasi daerah.
-Jangan terlalu panjang.
+Maksimum 100 kata.
+Tanpa formatting, tanpa \\n.
 Prompts: ${prompt}`,
     });
     return response.text
