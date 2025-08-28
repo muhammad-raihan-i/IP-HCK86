@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "save": "git add . && git commit -m \"chore: pre-deploy commit\" && git push origin development"
+    "save": "git add . && git commit -m \"chore: pre-deploy commit 2\" && git push origin development"
   },
   "keywords": [],
   "author": "Muhammad Raihan Indrastoto",
