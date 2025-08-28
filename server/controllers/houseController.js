@@ -1,6 +1,6 @@
 console.log("@houseController.js")
 console.log("Load model: House")
-const {House}=require("../models")
+const {User,House}=require("../models")
 class HouseController{
     static async create(req,res,next){//authentication required
         try{
@@ -24,7 +24,13 @@ class HouseController{
         try{
             console.log("try@HouseController/findOne")
             console.log("check if req.params.id exists")
-            let data=await House.findOne({where:{id:req.params.id}})
+            let data=await House.findOne({
+                where:{id:req.params.id},
+                include:[{
+                    model:User,
+                    attributes:{exclude:["password"]}
+                }]
+            })
             if(!data){
                 throw {name:"NotFound",message:"Data not found"}
             }

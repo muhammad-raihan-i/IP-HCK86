@@ -38,7 +38,7 @@ class UserController {
     static async register(req, res, next) {
         try {
             console.log("try@UserController/register")
-            console.log("let data=await User.create(req.body)")
+            console.log("req.body:",req.body)
             let data=await User.create(req.body)
             let data2={
                 id:data.id,

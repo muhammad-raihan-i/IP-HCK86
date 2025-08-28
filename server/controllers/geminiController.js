@@ -3,6 +3,9 @@ class GeminiController{
     static async gemini(req,res,next){
         try{
             console.log("try@GeminiController/gemini")
+            if(!req.body.prompt){
+                throw({name:"BadRequest",message:"Prompt required"})
+            }
             let data=await gemini(req.body.prompt)
             res.status(200).json({message:data})
         }catch(error){

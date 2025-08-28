@@ -37,6 +37,6 @@ function errorHandler(err,req,res,next){
     console.log("status:",status)
     console.log("message:",message)
     console.log("[FINISHED] at",new Date(),"\n")
-    res.status(status).json(message)
+    res.status(status).json({message})
 }
 module.exports=errorHandler
