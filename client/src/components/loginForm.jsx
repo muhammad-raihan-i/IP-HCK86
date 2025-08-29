@@ -3,6 +3,8 @@ import {useNavigate,Navigate} from "react-router"
 import http from "../helpers/index.js"
 import swal from "sweetalert2"
 export default function LoginForm(){
+    
+
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
     const navigate=useNavigate()
@@ -10,16 +12,16 @@ export default function LoginForm(){
     async function handleOnSubmit(event){
         event.preventDefault()
         console.log("submit")
-        let response=""
+        // let response=""
         try{
             let object={
                 
-                email:email,
-                password:password
+                email,
+                password
             }
             console.log(object)
-            response=await http.post("/login",object)
-            let token=response.data.access_token
+            const response=await http.post("/login",object)
+            const token=response.data.token
             console.log(response)
             console.log(response.data)
             console.log(token)
@@ -34,7 +36,7 @@ export default function LoginForm(){
             console.log(error)
             swal.fire({
                 title:"Login Failed",
-                text:error.response.data.message,
+                text:"Error",
                 icon:"error"
             })
         }

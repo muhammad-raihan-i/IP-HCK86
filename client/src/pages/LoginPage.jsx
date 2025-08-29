@@ -1,4 +1,5 @@
 import LoginForm from "../components/loginForm.jsx"
+import {Navigate,useNavigate} from "react-router"
 export default function LoginPage(){
     return(
         <>
@@ -8,6 +9,7 @@ export default function LoginPage(){
     <div className="col-md-6 mygold m-2 p-2">
         
       <LoginForm/>
+
     </div>
 </div>
 
