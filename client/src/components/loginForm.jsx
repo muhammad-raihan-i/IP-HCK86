@@ -3,8 +3,6 @@ import {useNavigate,Navigate} from "react-router"
 import http from "../helpers/index.js"
 import swal from "sweetalert2"
 export default function LoginForm(){
-    
-
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
     const navigate=useNavigate()
